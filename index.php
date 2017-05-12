@@ -15,14 +15,14 @@
             <div id="login" class="container-login tabcontent">
                 <p class="formLines">
                     <span>
-                        <label>Username:</label>
-                        <input type="text" name="username" >
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" id="username">
                     </span>
                 </p>
                 <p class="formLines">
                     <span>
-                        <label>Password:</label>
-                        <input type="password" name="password">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password">
                     </span>
                 </p>
                 <input id="submit" type="submit" name="submit" value="Login">
@@ -30,20 +30,20 @@
             <div id="signup" class="container-signup tabcontent">
                 <p class="formLines">
                     <span>
-                        <label>Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                        <input type="email" name="email">
+                        <label for="email">Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <input type="email" name="email" id="email">
                     </span>
                 </p>
                 <p class="formLines">
                     <span>
-                        <label>Username:</label>
-                        <input type="text" name="username" >
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" id="username">
                     </span>
                 </p>
                 <p class="formLines">
                     <span>
-                        <label>Password:</label>
-                        <input type="password" name="password">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password">
                     </span>
                 </p>
                 <input id="submit" type="submit" name="submit" value="Sign Up">
