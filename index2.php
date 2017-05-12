@@ -1,38 +1,55 @@
-<?php
-header("Cache-Control: no-cache, must-revalidate");
-?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <title>DBMS- database system</title>
-        <link rel="stylesheet" href="css/form.css?modified=20012009">
-        <link rel="stylesheet" href="css/test.css?modified=20012009">
+        <link rel="stylesheet" href="css/form.css?modified=2052009">
+        <link rel="stylesheet" href="css/test.css?modified=2011009">
+        <link rel="stylesheet" href="css/tab.css?modified=2004209">
     </head>
     <body>
+        <h1>DBMS System</h1>
         <div class="container-main">
             <ul class="tab">
                 <li class="tabLi" onclick='selTab(event, "login");'><a href="javascript:void(0)" id="default" class="tablink" >Log In</a></li>
                 <li class="tabLi" onclick='selTab(event, "signup")'><a href="javascript:void(0)" class="tablink">Sign Up</a></li>
             </ul>
-            <div class="tabcontent">
+            <div id="login" class="tabcontent">
                 <form action="login_control.php" method="post">
-                    <label for="log-username">Username:</label>
-                    <input type="text" name="username" id="log-username" required>
-                    <label for="log-password">Password:</label>
-                    <input type="password" name="password" id="log-password" required>
-                    <input type="submit" name="submit" value="submit">
+                    <p id="sp">
+                        <label for="log-username">Username:</label>
+                        <input type="text" name="username" id="log-username" placeholder="Username" required>
+                    </p>
+                    <p>
+                        <label for="log-password">Password:</label>
+                        <input type="password" name="password" id="log-password" placeholder="Password" required>
+                    </p>
+                        <input id="submit" type="submit" name="submit" value="Log in">
                 </form>
             </div>
-            <div class="tabcontent">
+            <div id="signup" class="tabcontent">
                 <form action="signup_control.php" method="post">
-                    <label for="sign-email">Email:</label>
-                    <input type="text" name="email" id="sign-email" required>
-                    <label for="sign-username">Username:</label>
-                    <input type="text" name="username" id="sign-username" required>
-                    <label for="sign-password">Password:</label>
-                    <input type="password" name="password" id="sign-password" required>
-                    <input type="submit" name="submit"value="submit">
+                    <p>
+                        <label for="sign-fname">First Name:</label>
+                        <input type="name" name="fname" id="sign-fname" placeholder="Enter your First name" required>
+                    </p>
+                    <p>
+                        <label for="sign-lname">Last Name:</label>
+                        <input type="text" name="lname" id="sign-lname" placeholder="Enter your Last name" required>
+                    </p>
+                    <p>
+                        <label for="sign-username">Username:</label>
+                        <input type="text" name="username" id="sign-username" placeholder="Create a Username" required>
+                    </p>
+                    <p>
+                        <label for="sign-password">Password:</label>
+                        <input type="password" name="password" id="sign-password" placeholder="Create a Password" required>
+                    </p>
+                    <p>
+                        <label for="sign-password">Re-enter password:</label>
+                        <input type="password" name="password" id="sign-re-password" placeholder="Re-enter password" required>
+                    </p>
+                    <input id="submit" type="submit" name="submit"value="Sign up">
                 </form>
             </div>
         </div>

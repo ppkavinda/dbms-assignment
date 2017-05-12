@@ -3,14 +3,21 @@ html{
     font-family: sans-serif;
     background: #dddddd;
 }
+h1{
+    text-align: center;
+    font-size: 40px;
+}
 .container-main{
-    display: block;
-    padding: 0;
+    width: 400px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 4%;
-    width: 50%;
-    height: 500px;
-    background: #ccc;
+    background: #f2f2f2;
+    display: block;
+    padding: 0;
     position: relative;
+    border: 1px solid #c3c3c3;
+}
+#sp{
+    width: 100%;
 }

@@ -1,9 +1,13 @@
 input{
+    box-sizing: border-box;
     font-size: inherit;
     line-height: inherit;
     border: 1px solid #ccc;
     border-radius: 3px;
     padding: 7px;
+    padding-left: 10px;
+    margin:auto 5%;
+    width: 90%;
 }
 .formLines input{
     font-weight: 100;
@@ -18,7 +22,7 @@ input{
     font-size: 16px;
     font-weight: 400;
     padding: 12px 50px;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
     display: block;
@@ -29,7 +33,7 @@ input{
     border-radius: 4px;
 }
 label{
-    display: inline-block;
+    display: none;
     max-width: 100%;
     margin-bottom: 5px;
     font-weight: 700;
