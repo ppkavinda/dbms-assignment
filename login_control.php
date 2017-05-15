@@ -20,6 +20,7 @@ if(isset($_POST["submit"])){
     <head>
         <meta charset="utf-8">
         <title>Logged In</title>
+        <link rel="stylesheet" href="css/test.css?modified=2011009">
     </head>
     <body>
         <h1>Logged In</h1>
