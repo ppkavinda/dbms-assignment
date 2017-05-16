@@ -4,12 +4,25 @@ if(isset($_POST["submit"])){
 
     $username = $_POST["username"];
     $password = $_POST["password"];
-    $sql = "SELECT id FROM users WHERE username = '$username' AND password = '" . md5($password) . "';";
+    $sql = "SELECT id, ulevel FROM users WHERE username = '$username' AND password = '" . md5($password) . "';";
     $result = mysqli_query($con, $sql);
 
     if(mysqli_num_rows($result)>0){
         $row = mysqli_fetch_array($result);
         echo $row["id"];
+        echo $row["ulevel"];
+
+        //if details are correct logging in the user
+        session_start();
+        $_SESSION["id"] = $row['id'];
+        $_SESSION["level"] = $row["ulevel"];
+
+        if($_SESSION["level"] == 1){
+            header("Location: admin.php");
+        }else{
+            header("Location: student.php");
+        }
+
     }else{
         echo "You have Failed! #This city.";
     }
