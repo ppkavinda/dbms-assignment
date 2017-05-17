@@ -6,6 +6,8 @@ if(isset($_POST["submit"])){
     $lname = $_POST["lname"];
     $department = $_POST["department"];
     $password = md5($_POST["password"]);
+    $mcode = trim($_POST["mcode"]);
+    $r = explode(" ", $mcode);
 
     include_once("config.php");
     $sql1 = "INSERT INTO staff(l_id, fname, lname, dep_id) VALUES ('$s_id', '$fname', '$lname', '$department');";
@@ -17,6 +19,17 @@ if(isset($_POST["submit"])){
         $mag = "* registration successed !";
     }else{
         echo mysqli_error($con);
+    }
+
+    for ($i=0; $i <count($r) ; $i++) {
+        $sql1 = "INSERT INTO staff_module(mcode, l_id) VALUES ('$r[$i]', '$s_id');";
+        $result1 = mysqli_query($con, $sql1) or die(mysqli_error($con));
+
+        if($result1){
+            $mag = "* registration successed !";
+        }else{
+            echo mysqli_error($con);
+        }
     }
 }
  ?>
@@ -65,6 +78,10 @@ if(isset($_POST["submit"])){
                  <p>
                      <label for="sign-department">Department id:</label>
                      <input type="text" name="department" id="sign-department" placeholder="Department Id" required>
+                 </p>
+                 <p>
+                     <label for="sign-id">mcode:</label>
+                     <input type="text" name="mcode" id="sign-id" placeholder="M codes" required>
                  </p>
                  <p>
                      <label for="sign-password">Password:</label>

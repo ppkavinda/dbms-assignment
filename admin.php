@@ -28,6 +28,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["level"])) {
      <div class="container">
          <a href="register_student.php">Registere Students</a><br>
          <a href="register_lecture.php">Registere Lecture</a><br>
+         <a href="while.php">While</a><br>
          <a href="search.php">Search Students</a>
      </div>
      <script src="js/navbar.js"></script>
