@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (!isset($_SESSION["id"]) || !isset($_SESSION["level"])) {
+    header("Location: index.php");
+}
  ?>
  <!DOCTYPE html>
  <html>
@@ -18,39 +21,14 @@ session_start();
          <li class="navli" onclick="active(this);"><a href="#">tmp2</a></li>
          <li class="navli" onclick="active(this);"><a href="#">tmp3</a></li>
          <li class="space" onclick="active(this);"><a href="#">space</a></li>
-         <li class="navli" id="logout"><a href="#">logout</a></li>
+         <li class="navli" id="logout"><a href="logout.php">logout</a></li>
      </ul>
      <h1>DBMS System</h1>
      <h1>Admin page</h1>
-     <div class="container-main">
-         <div id="signup" class="tabcontent">
-             <ul class="tab tabani">
-                 <li class="tabLi" ><a id="default" class="tablink" >Register Student</a></li>
-             </ul>
-             <form action="signup_control.php" method="post">
-                 <p>
-                     <label for="sign-fname">First Name:</label>
-                     <input type="name" name="fname" id="sign-fname" placeholder="Enter your First name" required>
-                 </p>
-                 <p>
-                     <label for="sign-lname">Last Name:</label>
-                     <input type="text" name="lname" id="sign-lname" placeholder="Enter your Last name" required>
-                 </p>
-                 <p>
-                     <label for="sign-username">Username:</label>
-                     <input type="text" name="username" id="sign-username" placeholder="Create a Username" required>
-                 </p>
-                 <p>
-                     <label for="sign-password">Password:</label>
-                     <input type="password" name="password" id="sign-password" placeholder="Create a Password" required>
-                 </p>
-                 <p>
-                     <label for="sign-password">Re-enter password:</label>
-                     <input type="password" name="password" id="sign-re-password" placeholder="Re-enter password" required>
-                 </p>
-                 <input id="submit" type="submit" name="submit"value="Sign up" onclick="return validatePassword()">
-             </form>
-         </div>
+     <div class="container">
+         <a href="register.php">Registere Students</a><br>
+         <a href="search.php">Search Students</a>
      </div>
+     <script src="js/navbar.js"></script>
      </body>
  </html>

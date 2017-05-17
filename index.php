@@ -1,3 +1,36 @@
+<?php
+if(isset($_POST["submit"])){
+    include_once("config.php");
+
+    $id = $_POST["id"];
+    $password = $_POST["password"];
+    $sql = "SELECT id, ulevel FROM users WHERE id = '$id' AND password = '" . md5($password) . "';";
+    $result = mysqli_query($con, $sql);
+
+    if(!isset($_SESSION["id"])) $link = '';
+
+    if(mysqli_num_rows($result)>0){
+        $row = mysqli_fetch_array($result);
+        echo $row["id"];
+        echo $row["ulevel"];
+
+        //if details are correct logging in the user
+        session_start();
+        $_SESSION["id"] = $row['id'];
+        $_SESSION["level"] = $row["ulevel"];
+        $link = "";
+
+        if($_SESSION["level"] == 0){
+            header("Location: admin.php");
+        }else{
+            header("Location: student.php");
+        }
+
+    }else{
+        $link = "* not matched and id";
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -5,62 +38,29 @@
         <title>DBMS- database system</title>
         <link rel="stylesheet" href="css/form.css?modified=20529">
         <link rel="stylesheet" href="css/test.css?modified=2011009">
-        <link rel="stylesheet" href="css/tab.css?modified=200209">
-        <link rel="stylesheet" href="css/navbar.css?modified=20209">
+        <link rel="stylesheet" href="css/tab.css?modified=2005209">
     </head>
     <body>
-        <ul class="navbar">
-            <li class="navli activenav" onclick="active(this);"><a href="#">home</a></li>
-            <li class="navli" onclick="active(this);"><a href="#">tmp1</a></li>
-            <li class="navli" onclick="active(this);"><a href="#">tmp2</a></li>
-            <li class="navli" onclick="active(this);"><a href="#">tmp3</a></li>
-            <li class="space" onclick="active(this);"><a href="#">space</a></li>
-            <li class="navli" id="logout"><a href="#">logout</a></li>
-        </ul>
         <h1>DBMS System</h1>
         <div class="container-main">
             <ul class="tab">
                 <li class="tabLi" onclick='selTab(event, "login");'><a href="javascript:void(0)" id="default" class="tablink" >Log In</a></li>
-                <li class="tabLi" onclick='selTab(event, "signup")'><a href="javascript:void(0)" class="tablink">Sign Up</a></li>
             </ul>
             <!-- Login form -->
             <div id="login" class="tabcontent">
-                <form action="login_control.php" method="post">
+                <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
+                    <p style="color: red; margin-left: 5%;">
+                        <?php if(isset($link)) echo $link; ?>
+                    </p>
                     <p id="sp">
-                        <label for="log-username">Username:</label>
-                        <input type="text" name="username" id="log-username" placeholder="Username" required>
+                        <label for="log-username">Id:</label>
+                        <input type="text" name="id" id="log-username" placeholder="Enter your id" required>
                     </p>
                     <p>
                         <label for="log-password">Password:</label>
                         <input type="password" name="password" id="log-password" placeholder="Password" required>
                     </p>
                         <input id="submit" type="submit" name="submit" value="Log in">
-                </form>
-            </div>
-            <!-- signup form -->
-            <div id="signup" class="tabcontent">
-                <form action="signup_control.php" method="post">
-                    <p>
-                        <label for="sign-fname">First Name:</label>
-                        <input type="name" name="fname" id="sign-fname" placeholder="Enter your First name" required>
-                    </p>
-                    <p>
-                        <label for="sign-lname">Last Name:</label>
-                        <input type="text" name="lname" id="sign-lname" placeholder="Enter your Last name" required>
-                    </p>
-                    <p>
-                        <label for="sign-username">Username:</label>
-                        <input type="text" name="username" id="sign-username" placeholder="Create a Username" required>
-                    </p>
-                    <p>
-                        <label for="sign-password">Password:</label>
-                        <input type="password" name="password" id="sign-password" placeholder="Create a Password" required>
-                    </p>
-                    <p>
-                        <label for="sign-password">Re-enter password:</label>
-                        <input type="password" name="password" id="sign-re-password" placeholder="Re-enter password" required>
-                    </p>
-                    <input id="submit" type="submit" name="submit"value="Sign up" onclick="return validatePassword()">
                 </form>
             </div>
         </div>

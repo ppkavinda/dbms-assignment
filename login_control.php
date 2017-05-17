@@ -2,9 +2,9 @@
 if(isset($_POST["submit"])){
     include_once("config.php");
 
-    $username = $_POST["username"];
+    $id = $_POST["id"];
     $password = $_POST["password"];
-    $sql = "SELECT id, ulevel FROM users WHERE username = '$username' AND password = '" . md5($password) . "';";
+    $sql = "SELECT id, ulevel FROM users WHERE id = '$id' AND password = '" . md5($password) . "';";
     $result = mysqli_query($con, $sql);
 
     if(mysqli_num_rows($result)>0){
@@ -24,6 +24,7 @@ if(isset($_POST["submit"])){
         }
 
     }else{
+
         echo "You have Failed! #This city.";
     }
 }

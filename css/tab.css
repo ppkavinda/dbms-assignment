@@ -24,7 +24,8 @@
     font-size: 20px;
     font-weight: bold;
     color: inherit;
-    margin-left: 11%;
+    margin-left: 32%;
+    text-transform: uppercase;
 }
 .tabLi:hover{
     color: #838383;
@@ -33,5 +34,5 @@
     clear: left;
 }
 .active{
-    background: #f2f2f2;
+    background: #ccc;
 }
