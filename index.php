@@ -27,7 +27,7 @@ if(isset($_POST["submit"])){
         }
 
     }else{
-        $link = "* not matched and id";
+        $link = "* id or password error";
     }
 }
 ?>
