@@ -81,7 +81,7 @@ if(isset($_POST["submit"])){
                  </p>
                  <p>
                      <label for="sign-id">mcode:</label>
-                     <input type="text" name="mcode" id="sign-id" placeholder="M codes" required>
+                     <input type="text" name="mcode" id="sign-id" placeholder="Module codes (seperate by a space)" required>
                  </p>
                  <p>
                      <label for="sign-password">Password:</label>

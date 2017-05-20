@@ -30,6 +30,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["level"])) {
          <a href="register_lecture.php">Registere Lecture</a><br>
          <a href="while.php">While</a><br>
          <a href="search.php">Search Students</a>
+         <a href="insert_results.php">Enter results</a>
      </div>
      <script src="js/navbar.js"></script>
      </body>
