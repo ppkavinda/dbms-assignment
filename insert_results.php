@@ -7,15 +7,16 @@ if(isset($_POST["submit"])){
     $result = $_POST["result"];
 
     include_once("config.php");
-    $sql1 = "INSERT INTO exmas(mcode, date) VALUES ('$mcode', '$date');";
+    // $sql1 = "INSERT INTO exmas(mcode, date) VALUES ('$mcode', '$date');";
     $sql2 = "INSERT INTO student_exam(s_id, date, mcode, grade) VALUES ('$s_id', '$date', '$mcode', '$result');";
-    $result1 = mysqli_query($con, $sql1) or die(mysqli_error($con));
+    // $result1 = mysqli_query($con, $sql1) or die(mysqli_error($con));
     $result2 = mysqli_query($con, $sql2) or die(mysqli_error($con));
 
-    if($result1 && $result2){
+    if(/* $result1 && */ $result2){
         $msg = "* registration successed !";
     }else{
-        echo mysqli_error($con);
+        $msg = "* insertion failed !";
+        // echo mysqli_error($con);
     }
 }
  ?>

@@ -22,3 +22,18 @@ h1{
 .hide{
     color: black;
 }
+.admin-link{
+    background: rgb(25, 53, 114);
+    margin: 10px;
+    text-align: center;
+    font-weight: bold;
+}
+.admin-link:hover{
+    background: rgb(40, 180, 60);
+}
+.admin{
+    background: #ddd;
+    border: none;
+    border-radius: 4px;
+    color: white;
+}
