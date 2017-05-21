@@ -10,13 +10,26 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["level"])) {
 if(isset($_GET["id"])){
     include_once("config.php");
     $s_id = $_GET["id"];
-    $sql = "SELECT date, student_exam.mcode, grade, title FROM student_exam INNER JOIN module ON student_exam.mcode=module.mcode WHERE student_exam.s_id='$s_id';";
-    $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+    $sql1 = "SELECT date, student_exam.mcode, grade, title FROM student_exam INNER JOIN module ON student_exam.mcode=module.mcode WHERE student_exam.s_id='$s_id';";
+    $sql2 = "SELECT title FROM module WHERE d_id=(SELECT d_id FROM students WHERE s_id='$s_id');";
+    $result1 = mysqli_query($con, $sql1) or die(mysqli_error($con));
+    $result2 = mysqli_query($con, $sql2) or die(mysqli_error($con));
 
-    if(mysqli_num_rows($result)>0){
-        while($row=mysqli_fetch_assoc($result)){
-            print_r($row);
+    if(mysqli_num_rows($result1)>0){
+        $str = '';
+        while($row=mysqli_fetch_assoc($result1)){
+            $str .= "<tr style='margin: 10px;'><td>$row[date]</td><td>$row[title]</td><td>$row[grade]</td></tr>";
         }
+    }else{
+        $str = "<tr><td style='border: none;'>No data</td></tr>";
+    }
+    if(mysqli_num_rows($result2)>0){
+        $str2 = '';
+        while($row=mysqli_fetch_assoc($result2)){
+            $str2 .="<li style='margin: 10px; list-style-type: none;'>$row[title]</li>";
+        }
+    }else{
+        $str2 = "Non data";
     }
 }
  ?>
@@ -49,15 +62,21 @@ if(isset($_GET["id"])){
     <h1>DBMS System</h1>
         <h1>Student page</h1>
         <div class="container-main2">
-            <h2>Results</h2>
+            <h2>Exam Results</h2>
             <table>
                 <tr>
                     <th>date</th><th>module</th><th>grade</th>
                 </tr>
                 <tr>
-                    <td>a</td><td>a</td><td>a</td>
+                    <?php if(isset($str)){echo $str; } ?>
                 </tr>
             </table>
+        </div>
+        <div class="container-main2">
+            <h2>Modules you taken</h2>
+            <ul>
+                <?php echo $str2 ?>
+            </ul>
         </div>
         <script src="js/navbar.js"></script>
     </body>
