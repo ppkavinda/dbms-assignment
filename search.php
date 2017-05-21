@@ -4,17 +4,17 @@
     if(isset($_POST["submit"]) || isset($_GET["all"])){
         if(isset($_POST["submit"])){
             $search = $_POST["search"];
-            $sql = "SELECT * FROM users WHERE fname LIKE '%$search%' OR lname LIKE '%$search%'";
+            $sql = "SELECT * FROM students INNER JOIN diploma ON students.d_id=diploma.d_id WHERE fname LIKE '%$search%' OR lname LIKE '%$search%'";
         }else if(isset($_GET["all"])){
-            $sql = "SELECT * FROM users";
+            $sql = "SELECT * FROM students INNER JOIN diploma ON students.d_id=diploma.d_id";
         }
         $result = mysqli_query($con, $sql);
 
     if(mysqli_num_rows($result)>0){
         $str= "<table>";
-        $str.="<tr><th>id</th><th>first name</th><th>last name</th><th>username</th><th style='background: #ddd;'></th></tr>";
+        $str.="<tr><th>id</th><th> name</th><th>address1</th><th>diploma</th><th style='background: #ddd;'></th></tr>";
         while($row = mysqli_fetch_array($result)){
-            $str.= "<tr><td>$row[id]</td><td>$row[fname]</td><td>$row[lname]</td><td>$row[username]</td><td><a href='#'>Delete</a> , <a href='#'>Update</a></td></tr>";
+            $str.= "<tr><td><a href='student.php?id=$row[s_id]'>$row[s_id]</a></td><td>$row[fname]" . " " . "$row[lname]</td><td>$row[address1]</td><td>$row[name]</td><td><a href='#'>Delete</a> , <a href='#'>Update</a></td></tr>";
         }
         $str.= "</table>";
     }else{
