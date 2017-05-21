@@ -1,4 +1,4 @@
-input{
+input, .input{
     box-sizing: border-box;
     font-size: inherit;
     line-height: inherit;

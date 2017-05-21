@@ -10,8 +10,8 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["level"])) {
      <meta charset="utf-8">
      <title>DBMS- database system</title>
      <link rel="stylesheet" href="css/form.css?modified=02209">
-     <link rel="stylesheet" href="css/test.css?modified=0211009">
-     <link rel="stylesheet" href="css/tab.css?modified=020209">
+     <link rel="stylesheet" href="css/test.css?modified=02009">
+     <link rel="stylesheet" href="css/tab.css?modified=022309">
      <link rel="stylesheet" href="css/navbar.css?modified=022309">
  </head>
  <body>
@@ -25,11 +25,12 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["level"])) {
      </ul>
      <h1>DBMS System</h1>
      <h1>Admin page</h1>
-     <div class="container">
-         <a href="register_student.php">Registere Students</a><br>
-         <a href="register_lecture.php">Registere Lecture</a><br>
-         <a href="while.php">While</a><br>
-         <a href="search.php">Search Students</a>
+     <div class="container-main admin">
+         <a class="admin-link" href="register_student.php">Registere Students</a>
+         <a class="admin-link" href="register_lecture.php">Registere Lecture</a>
+         <a class="admin-link" href="while.php">Update module's lecturers</a>
+         <a class="admin-link" href="search.php">Search Students</a>
+         <a class="admin-link" href="insert_results.php">Enter results</a>
      </div>
      <script src="js/navbar.js"></script>
      </body>
