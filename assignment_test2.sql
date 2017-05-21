@@ -2,8 +2,8 @@
 -- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 17, 2017 at 07:57 PM
+-- Host: 127.0.0.1
+-- Generation Time: May 21, 2017 at 09:13 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -39,7 +39,10 @@ CREATE TABLE `department` (
 
 INSERT INTO `department` (`dep_id`, `name`) VALUES
 ('DEP1', 'it'),
-('DEP2', 'physics');
+('DEP2', 'physics'),
+('DEP3', 'maths'),
+('DEP4', 'chemistry'),
+('DEP5', 'mechanic');
 
 -- --------------------------------------------------------
 
@@ -59,7 +62,14 @@ CREATE TABLE `diploma` (
 
 INSERT INTO `diploma` (`d_id`, `name`, `dep_id`) VALUES
 ('D1', 'cs', 'DEP1'),
-('D2', 'is', 'DEP1');
+('D2', 'is', 'DEP1'),
+('D3', 'chemist', 'DEP4'),
+('D4', 'physist', 'DEP2'),
+('D5', 'statistic', 'DEP3'),
+('D6', 'engineer', 'DEP5'),
+('D7', 'se', 'DEP1'),
+('D8', 'radiology', 'DEP4'),
+('D9', 'astronomy', 'DEP2');
 
 -- --------------------------------------------------------
 
@@ -79,9 +89,7 @@ CREATE TABLE `diploma_module` (
 
 INSERT INTO `diploma_module` (`d_id`, `mcode`, `semester`) VALUES
 ('D1', 'M1', '1'),
-('D1', 'M2', '1'),
-('D2', 'M1', '1'),
-('D2', 'M2', '1');
+('D1', 'M2', '1');
 
 -- --------------------------------------------------------
 
@@ -99,8 +107,14 @@ CREATE TABLE `exmas` (
 --
 
 INSERT INTO `exmas` (`date`, `mcode`) VALUES
+('2017-05-09', 'M1'),
+('2017-05-10', 'M1'),
 ('2017-05-16', 'M1'),
-('2017-05-16', 'M2');
+('2017-05-17', 'M1'),
+('2017-05-26', 'M1'),
+('2017-05-01', 'M2'),
+('2017-05-16', 'M2'),
+('2017-05-04', 'M3');
 
 -- --------------------------------------------------------
 
@@ -114,16 +128,27 @@ CREATE TABLE `module` (
   `cr_level` int(11) NOT NULL,
   `coordinator_id` varchar(50) NOT NULL,
   `d_id` varchar(50) NOT NULL,
-  `dep_id` varchar(50) NOT NULL
+  `dep_id` varchar(50) NOT NULL,
+  `semester` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `module`
 --
 
-INSERT INTO `module` (`mcode`, `title`, `cr_level`, `coordinator_id`, `d_id`, `dep_id`) VALUES
-('M1', 'dsa', 2, 'L1', 'D1', 'DEP1'),
-('M2', 'programming 1', 2, 'L2', 'D2', 'DEP1');
+INSERT INTO `module` (`mcode`, `title`, `cr_level`, `coordinator_id`, `d_id`, `dep_id`, `semester`) VALUES
+('M1', 'dsa 1', 2, 'L1', 'D1', 'DEP1', 1),
+('M12', 'machine learn', 2, '', 'D7', 'DEP1', 2),
+('M13', 'x-ray', 3, '', 'D8', 'DEP4', 1),
+('M14', 'quontom mechenic', 3, '', 'D9', 'DEP2', 1),
+('M15', 'magnetic feidls', 3, '', 'D4', 'DEP2', 1),
+('M2', 'programming 1', 2, 'L2', 'D2', 'DEP1', 1),
+('M3', 'math 1', 5, '', 'D1', 'DEP3', 1),
+('M4', 'prog & problem 1', 4, '', 'D2', 'DEP1', 1),
+('M5', 'computer system', 4, '', 'D2', 'DEP1', 1),
+('M6', 'orgenic', 3, '', 'D3', 'DEP4', 2),
+('M8', 'atom 2', 3, '', 'D3', 'DEP4', 2),
+('M9', 'electronic 2', 3, '', 'D4', 'DEP2', 2);
 
 -- --------------------------------------------------------
 
@@ -164,7 +189,9 @@ CREATE TABLE `staff_module` (
 --
 
 INSERT INTO `staff_module` (`mcode`, `l_id`) VALUES
-('M1', 'L1');
+('M2', 'L1'),
+('M1', 'L2'),
+('M2', 'L2');
 
 -- --------------------------------------------------------
 
@@ -208,8 +235,15 @@ CREATE TABLE `student_exam` (
 --
 
 INSERT INTO `student_exam` (`date`, `mcode`, `s_id`, `grade`) VALUES
+('2017-05-01', 'M2', 'S1', 'B'),
+('2017-05-01', 'M2', 'S2', 'D-'),
+('2017-05-04', 'M3', 'S2', 'D+'),
+('2017-05-09', 'M1', 'S1', 'B-'),
+('2017-05-10', 'M1', 'S2', 'D-'),
 ('2017-05-16', 'M1', 'S1', 'A+'),
-('2017-05-16', 'M1', 'S2', 'B-');
+('2017-05-16', 'M1', 'S2', 'B-'),
+('2017-05-17', 'M1', 'S1', 'C+'),
+('2017-05-26', 'M1', 'S1', 'A+');
 
 -- --------------------------------------------------------
 
@@ -255,6 +289,7 @@ ALTER TABLE `diploma`
 -- Indexes for table `diploma_module`
 --
 ALTER TABLE `diploma_module`
+  ADD PRIMARY KEY (`d_id`,`mcode`),
   ADD KEY `d_id` (`d_id`),
   ADD KEY `mcode` (`mcode`);
 
@@ -262,13 +297,16 @@ ALTER TABLE `diploma_module`
 -- Indexes for table `exmas`
 --
 ALTER TABLE `exmas`
-  ADD PRIMARY KEY (`date`,`mcode`);
+  ADD PRIMARY KEY (`date`,`mcode`),
+  ADD KEY `mcode` (`mcode`);
 
 --
 -- Indexes for table `module`
 --
 ALTER TABLE `module`
-  ADD PRIMARY KEY (`mcode`);
+  ADD PRIMARY KEY (`mcode`),
+  ADD KEY `module_ibfk_2` (`d_id`),
+  ADD KEY `diploma_module_ibfk_3` (`dep_id`);
 
 --
 -- Indexes for table `staff`
@@ -277,15 +315,24 @@ ALTER TABLE `staff`
   ADD PRIMARY KEY (`l_id`);
 
 --
+-- Indexes for table `staff_module`
+--
+ALTER TABLE `staff_module`
+  ADD PRIMARY KEY (`mcode`,`l_id`),
+  ADD KEY `staff_module_ibfk_1` (`l_id`);
+
+--
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
-  ADD PRIMARY KEY (`s_id`);
+  ADD PRIMARY KEY (`s_id`),
+  ADD KEY `d_id` (`d_id`);
 
 --
 -- Indexes for table `student_exam`
 --
 ALTER TABLE `student_exam`
+  ADD PRIMARY KEY (`date`,`mcode`,`s_id`),
   ADD KEY `date` (`date`,`mcode`),
   ADD KEY `s_id` (`s_id`);
 
@@ -309,15 +356,41 @@ ALTER TABLE `diploma`
 -- Constraints for table `diploma_module`
 --
 ALTER TABLE `diploma_module`
-  ADD CONSTRAINT `diploma_module_ibfk_2` FOREIGN KEY (`mcode`) REFERENCES `module` (`mcode`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `diploma_module_ibfk_1` FOREIGN KEY (`d_id`) REFERENCES `diploma` (`d_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `diploma_module_ibfk_1` FOREIGN KEY (`d_id`) REFERENCES `diploma` (`d_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `diploma_module_ibfk_2` FOREIGN KEY (`mcode`) REFERENCES `module` (`mcode`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `exmas`
+--
+ALTER TABLE `exmas`
+  ADD CONSTRAINT `exmas_ibfk_1` FOREIGN KEY (`mcode`) REFERENCES `module` (`mcode`);
+
+--
+-- Constraints for table `module`
+--
+ALTER TABLE `module`
+  ADD CONSTRAINT `diploma_module_ibfk_3` FOREIGN KEY (`dep_id`) REFERENCES `department` (`dep_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `module_ibfk_2` FOREIGN KEY (`d_id`) REFERENCES `diploma` (`d_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `staff_module`
+--
+ALTER TABLE `staff_module`
+  ADD CONSTRAINT `staff_module_ibfk_1` FOREIGN KEY (`l_id`) REFERENCES `staff` (`l_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `staff_module_ibfk_2` FOREIGN KEY (`mcode`) REFERENCES `module` (`mcode`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `students`
+--
+ALTER TABLE `students`
+  ADD CONSTRAINT `students_ibfk_1` FOREIGN KEY (`d_id`) REFERENCES `diploma` (`d_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `student_exam`
 --
 ALTER TABLE `student_exam`
-  ADD CONSTRAINT `student_exam_ibfk_2` FOREIGN KEY (`s_id`) REFERENCES `students` (`s_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `student_exam_ibfk_1` FOREIGN KEY (`date`,`mcode`) REFERENCES `exmas` (`date`, `mcode`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `student_exam_ibfk_1` FOREIGN KEY (`date`,`mcode`) REFERENCES `exmas` (`date`, `mcode`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_exam_ibfk_2` FOREIGN KEY (`s_id`) REFERENCES `students` (`s_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
