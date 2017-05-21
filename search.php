@@ -14,7 +14,7 @@
         $str= "<table>";
         $str.="<tr><th>id</th><th> name</th><th>address1</th><th>diploma</th><th style='background: #ddd;'></th></tr>";
         while($row = mysqli_fetch_array($result)){
-            $str.= "<tr><td><a href='student.php?id=$row[s_id]'>$row[s_id]</a></td><td>$row[fname]" . " " . "$row[lname]</td><td>$row[address1]</td><td>$row[name]</td><td><a href='#'>Delete</a> , <a href='#'>Update</a></td></tr>";
+            $str.= "<tr><td><a style='text-decoration: none;' href='student.php?id=$row[s_id]'>$row[s_id]</a></td><td><a style='text-decoration: none;' href='student.php?id=$row[s_id]'>$row[fname]" . " " . "$row[lname]</a></td><td>$row[address1]</td><td>$row[name]</td><td><a href='#'>Delete</a> , <a href='#'>Update</a></td></tr>";
         }
         $str.= "</table>";
     }else{
