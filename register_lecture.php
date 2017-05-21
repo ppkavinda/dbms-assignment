@@ -81,7 +81,7 @@ if(isset($_POST["submit"])){
                  </p>
                  <p>
                      <label for="sign-id">mcode:</label>
-                     <input type="text" name="mcode" id="sign-id" placeholder="M codes" required>
+                     <input type="text" name="mcode" id="sign-id" placeholder="Module codes" required>
                  </p>
                  <p>
                      <label for="sign-password">Password:</label>
@@ -91,7 +91,7 @@ if(isset($_POST["submit"])){
                      <label for="sign-password">Re-enter password:</label>
                      <input type="password" name="password" id="sign-re-password" placeholder="Re-enter password" required>
                  </p>
-                 <input id="submit" type="submit" name="submit"value="Sign up" onclick="return validatePassword()">
+                 <input id="submit" type="submit" name="submit"value="Register" onclick="return validatePassword()">
              </form>
          </div>
      </div>

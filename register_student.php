@@ -84,7 +84,7 @@ if(isset($_POST["submit"])){
                      <label for="sign-password">Re-enter password:</label>
                      <input type="password" name="password" id="sign-re-password" placeholder="Re-enter password" required>
                  </p>
-                 <input id="submit" type="submit" name="submit"value="Sign up" onclick="return validatePassword()">
+                 <input id="submit" type="submit" name="submit"value="Register" onclick="return validatePassword()">
              </form>
          </div>
      </div>
