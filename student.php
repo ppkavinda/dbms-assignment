@@ -7,9 +7,9 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["level"])) {
     $link = "";
 }
 
-if(isset($_GET["id"])){
+if(isset($_GET["s_id"])){
     include_once("config.php");
-    $s_id = $_GET["id"];
+    $s_id = $_GET["s_id"];
     $sql1 = "SELECT date, student_exam.mcode, grade, title FROM student_exam INNER JOIN module ON student_exam.mcode=module.mcode WHERE student_exam.s_id='$s_id';";
     $sql2 = "SELECT mcode, title FROM module WHERE d_id=(SELECT d_id FROM students WHERE s_id='$s_id');";
     $sql3 = "SELECT s_id, fname, lname, address1, address2, diploma.name FROM students INNER JOIN diploma ON students.d_id=diploma.d_id WHERE s_id='$s_id';";
@@ -25,13 +25,13 @@ if(isset($_GET["id"])){
     }else{
         $str = "<tr><td style='border: none;'>No data</td></tr>";
     }
+    $str2 = '';
     if(mysqli_num_rows($result2)>0){
-        $str2 = '';
         while($row=mysqli_fetch_assoc($result2)){
             $str2 .="<li style='margin: 10px; '><a href='modules.php?mcode=$row[mcode]'>$row[title]</a></li>";
         }
     }else{
-        $str2 = "Non data";
+        $str2 = "No data";
     }
     if(mysqli_num_rows($result3)>0){
         $str3 = '';

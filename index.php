@@ -22,8 +22,10 @@ if(isset($_POST["submit"])){
 
         if($_SESSION["level"] == 0){
             header("Location: admin.php");
+        }else if($_SESSION["level"] == 1){
+            header("Location:staff.php?s_id=$row[id]");
         }else{
-            header("Location: student.php?s_id=$row['id']");
+            header("Location:student.php?s_id=$row[id]");
         }
 
     }else{
