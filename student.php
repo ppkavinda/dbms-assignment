@@ -11,9 +11,11 @@ if(isset($_GET["id"])){
     include_once("config.php");
     $s_id = $_GET["id"];
     $sql1 = "SELECT date, student_exam.mcode, grade, title FROM student_exam INNER JOIN module ON student_exam.mcode=module.mcode WHERE student_exam.s_id='$s_id';";
-    $sql2 = "SELECT title FROM module WHERE d_id=(SELECT d_id FROM students WHERE s_id='$s_id');";
+    $sql2 = "SELECT mcode, title FROM module WHERE d_id=(SELECT d_id FROM students WHERE s_id='$s_id');";
+    $sql3 = "SELECT s_id, fname, lname, address1, address2, diploma.name FROM students INNER JOIN diploma ON students.d_id=diploma.d_id WHERE s_id='$s_id';";
     $result1 = mysqli_query($con, $sql1) or die(mysqli_error($con));
     $result2 = mysqli_query($con, $sql2) or die(mysqli_error($con));
+    $result3 = mysqli_query($con, $sql3) or die(mysqli_error($con));
 
     if(mysqli_num_rows($result1)>0){
         $str = '';
@@ -26,10 +28,19 @@ if(isset($_GET["id"])){
     if(mysqli_num_rows($result2)>0){
         $str2 = '';
         while($row=mysqli_fetch_assoc($result2)){
-            $str2 .="<li style='margin: 10px; list-style-type: none;'>$row[title]</li>";
+            $str2 .="<li style='margin: 10px; '><a href='modules.php?mcode=$row[mcode]'>$row[title]</a></li>";
         }
     }else{
         $str2 = "Non data";
+    }
+    if(mysqli_num_rows($result3)>0){
+        $str3 = '';
+        while($row=mysqli_fetch_assoc($result3)){
+            $str3 .= "<li>Student Id: <b>$row[s_id]</b></li>";
+            $str3 .= "<li>Name: <b>$row[fname] "." "."$row[lname]</b></li>";
+            $str3 .= "<li>Address: <b>$row[address1]"." "."$row[address2]</b></li>";
+            $str3 .= "<li>Diploma: <b>$row[name]</b></li>";
+        }
     }
 }
  ?>
@@ -39,7 +50,7 @@ if(isset($_GET["id"])){
     <meta charset="utf-8">
     <title>DBMS- database system</title>
     <link rel="stylesheet" href="css/form.css?modified=205209">
-    <link rel="stylesheet" href="css/test.css?modified=2009">
+    <link rel="stylesheet" href="css/test.css?modified=20094">
     <link rel="stylesheet" href="css/tab.css?modified=200209">
     <link rel="stylesheet" href="css/navbar.css?modified=20209">
     <style>
@@ -62,14 +73,18 @@ if(isset($_GET["id"])){
     <h1>DBMS System</h1>
         <h1>Student page</h1>
         <div class="container-main2">
+            <h2>Student details</h2>
+            <ul>
+                <?php if(isset($str3)){echo $str3; } ?>
+            </ul>
+        </div>
+        <div class="container-main2">
             <h2>Exam Results</h2>
             <table>
                 <tr>
                     <th>date</th><th>module</th><th>grade</th>
                 </tr>
-                <tr>
                     <?php if(isset($str)){echo $str; } ?>
-                </tr>
             </table>
         </div>
         <div class="container-main2">

@@ -1,5 +1,17 @@
 <?php
 session_start();
+if (isset($_GET['s_id'])) {
+    $s_id = $_GET['s_id'];
+    $sql = "SELECT * FROM students WHERE s_id='$s_id'";
+    include_once("config.php");
+    $result = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+    if($result){
+        $row = mysqli_fetch_assoc($result);
+    }else{
+        echo "Error!";
+    }
+}
 if(isset($_POST["submit"])){
     $s_id = $_POST["id"];
     $fname = $_POST["fname"];
@@ -7,18 +19,15 @@ if(isset($_POST["submit"])){
     $address1 = $_POST["address1"];
     $address2 = $_POST["address2"];
     $diploma = $_POST["diploma"];
-    $password = md5($_POST["password"]);
 
     include_once("config.php");
-    $sql1 = "INSERT INTO students(s_id, fname, lname, address1, address2, d_id) VALUES ('$s_id', '$fname', '$lname', '$address1', '$address2', '$diploma');";
-    $sql2 = " INSERT INTO users(id, password, ulevel) VALUES ('$s_id', '$password', 2);";
+    $sql1 = "UPDATE students SET s_id='$s_id', fname='$fname', lname='$lname', address1='$address1', address2='$address2', d_id='$diploma' WHERE s_id='$s_id';";
     $result1 = mysqli_query($con, $sql1) or die(mysqli_error($con));
-    $result2 = mysqli_query($con, $sql2) or die(mysqli_error($con));
 
-    if($result1 && $result2){
-        $msg = "* registration successed !";
+    if($result1){
+        header("Location: search.php");
     }else{
-        $msg = "* Falied!!";
+        echo mysqli_error($con);
     }
 }
  ?>
@@ -46,45 +55,36 @@ if(isset($_POST["submit"])){
      <div class="container-main">
          <div id="signup" class="tabcontent">
              <ul class="tab tabani">
-                 <li class="tabLi" ><a style="margin-left: 17%;" id="default" class="tablink" >Register Student</a></li>
+                 <li class="tabLi" ><a style="margin-left: 8%;" id="default" class="tablink" >Update Student detail</a></li>
              </ul>
              <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                  <p style="color: red; margin-left: 5%;">
-                     <?php if(isset($msg)) echo $msg; ?>
                  </p>
                  <p>
                      <label for="sign-id">Id:</label>
-                     <input type="text" name="id" id="sign-id" placeholder="Enter ID" required>
+                     <input type="text" name="id" id="sign-id" placeholder="Enter ID" value="<?php echo $row['s_id'] ?>" required>
                  </p>
                  <p>
                      <label for="sign-fname">First Name:</label>
-                     <input type="name" name="fname" id="sign-fname" placeholder="Enter First name" required>
+                     <input type="name" name="fname" id="sign-fname" placeholder="Enter First name" value="<?php echo $row['fname'] ?>" required>
                  </p>
                  <p>
                      <label for="sign-lname">Last Name:</label>
-                     <input type="text" name="lname" id="sign-lname" placeholder="Enter Last name" required>
+                     <input type="text" name="lname" id="sign-lname" placeholder="Enter Last name" value="<?php echo $row['lname'] ?>" required>
                  </p>
                  <p>
                      <label for="sign-address1">Address line 1:</label>
-                     <input type="text" name="address1" id="sign-address1" placeholder="Enter address line 1" required>
+                     <input type="text" name="address1" id="sign-address1" placeholder="Enter address line 1" value="<?php echo $row['address1'] ?>" required>
                  </p>
                  <p>
                      <label for="sign-address2">Address line 2:</label>
-                     <input type="text" name="address2" id="sign-address2" placeholder="Enter address line 2" required>
+                     <input type="text" name="address2" id="sign-address2" placeholder="Enter address line 2" value="<?php echo $row['address2'] ?>" required>
                  </p>
                  <p>
                      <label for="sign-diploma">Diploma:</label>
-                     <input type="text" name="diploma" id="sign-diploma" placeholder="Diploma Id" required>
+                     <input type="text" name="diploma" id="sign-diploma" placeholder="Diploma Id" value="<?php echo $row['d_id'] ?>" required>
                  </p>
-                 <p>
-                     <label for="sign-password">Password:</label>
-                     <input type="password" name="password" id="sign-password" placeholder="Create a Password" required>
-                 </p>
-                 <p>
-                     <label for="sign-password">Re-enter password:</label>
-                     <input type="password" name="password" id="sign-re-password" placeholder="Re-enter password" required>
-                 </p>
-                 <input id="submit" type="submit" name="submit"value="Register" onclick="return validatePassword()">
+                 <input id="submit" type="submit" name="submit"value="Update" onclick="return validatePassword()">
              </form>
          </div>
      </div>

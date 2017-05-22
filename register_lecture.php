@@ -16,9 +16,9 @@ if(isset($_POST["submit"])){
     $result2 = mysqli_query($con, $sql2) or die(mysqli_error($con));
 
     if($result1 && $result2){
-        $mag = "* registration successed !";
+        $msg = "* registration successed !";
     }else{
-        echo mysqli_error($con);
+        $msg = "* Falied! ";
     }
 
     for ($i=0; $i <count($r) ; $i++) {
