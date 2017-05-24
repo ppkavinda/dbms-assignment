@@ -1,1 +1,1 @@
-<?php echo $_GET["s_id"]; ?>
+<?php echo $_GET["l_id"]; ?>

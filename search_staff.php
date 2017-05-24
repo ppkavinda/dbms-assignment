@@ -4,20 +4,19 @@
     if(isset($_POST["submit"]) || isset($_GET["all"])){
         if(isset($_POST["submit"])){
             $search = $_POST["search"];
-            $sql = "SELECT * FROM students INNER JOIN diploma ON students.d_id=diploma.d_id WHERE fname LIKE '%$search%' OR lname LIKE '%$search%'";
+            $sql = "SELECT DISTINCT * FROM staff WHERE fname LIKE '%$search%' OR lname LIKE '%$search%';";
         }else if(isset($_GET["all"])){
-            $sql = "SELECT * FROM students INNER JOIN diploma ON students.d_id=diploma.d_id";
+            $sql = "SELECT * FROM staff";
         }
         $result = mysqli_query($con, $sql);
 
     if(mysqli_num_rows($result)>0){
         $str= "<table>";
-        $str.="<tr><th>id</th><th> name</th><th>address</th><th>diploma</th><th style='background: #ddd;'></th></tr>";
+        $str.="<tr><th>id</th><th> name</th><th style='background: #ddd;'></th></tr>";
         while($row = mysqli_fetch_array($result)){
-            $str.= "<tr><td><a style='text-decoration: none;' href='student.php?s_id=$row[s_id]'>$row[s_id]</a></td>";
-            $str.= "<td><a style='text-decoration: none;' href='student.php?s_id=$row[s_id]'>$row[fname]" . " " . "$row[lname]</a></td>";
-            $str.= "<td>$row[address2]</td><td>$row[name]</td>";
-            $str.= "<td><a href='delete.php?s_id=$row[s_id]'>Delete</a> , <a href='update_student.php?s_id=$row[s_id]'>Update</a></td></tr>";
+            $str.= "<tr><td><a style='text-decoration: none;' href='staff.php?l_id=$row[l_id]'>$row[l_id]</a></td>";
+            $str.= "<td><a style='text-decoration: none;' href='staff.php?l_id=$row[l_id]'>$row[fname]" . " " . "$row[lname]</a></td>";
+            $str.= "<td><a href='delete.php?l_id=$row[l_id]'>Delete</a> , <a href='update_staff.php?l_id=$row[l_id]'>Update</a></td></tr>";
         }
         $str.= "</table>";
     }else{
@@ -29,7 +28,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Search for students</title>
+        <title>Search for staffs</title>
         <link rel="stylesheet" href="css/form.css?modified=205209">
         <link rel="stylesheet" href="css/test.css?modified=20009">
         <link rel="stylesheet" href="css/tab.css?modified=200209">
@@ -57,7 +56,7 @@
                         <input id="submit" type="submit" name="submit" value="Search">
                 </form>
                 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
-                    <input style="margin-bottom: 15px;" type="submit" name="all" value="Show all students">
+                    <input style="margin-bottom: 15px;" type="submit" name="all" value="Show all staff">
                 </form>
             </div>
         </div>
