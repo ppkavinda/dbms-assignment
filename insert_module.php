@@ -6,11 +6,12 @@ if(isset($_POST["submit"])){
     $title = $_POST["title"];
     $l_id = $_POST["l_id"];
     $d_id = $_POST["d_id"];
+    $dep_id = $_POST["dep_id"];
     $sem = $_POST["sem"];
 
     include_once("config.php");
     // $sql1 = "INSERT INTO exmas(mcode, date) VALUES ('$mcode', '$date');";
-    $sql2 = "INSERT INTO module(mcode, cr_level, title, coordinator_id, d_id, sem) VALUES ('$mcode', '$cr_level', '$title', '$l_id', '$d_id', '$sem');";
+    $sql2 = "INSERT INTO module(mcode, cr_level, title, coordinator_id, d_id, dep_id, semester) VALUES ('$mcode', '$cr_level', '$title', '$l_id', '$d_id', '$dep_id', '$sem');";
     // $result1 = mysqli_query($con, $sql1) or die(mysqli_error($con));
     $result2 = mysqli_query($con, $sql2) or die(mysqli_error($con));
 
@@ -93,6 +94,22 @@ if(isset($_POST["submit"])){
                      <label for="sign-mcode">Module code:</label>
                      <select class="input" name="d_id">
                          <option value="M1">-- Select the Diploma Id</>
+                             <?php echo $str ?>
+                     </select>
+                 </p>
+                 <?php
+                 $sql = "SELECT dep_id FROM department;";
+                 include_once("config.php");
+                 $result = mysqli_query($con, $sql) or die(mysqli_error());
+                 $str ='';
+                 while($row=mysqli_fetch_array($result)){
+                     $str .="<option value='$row[dep_id]'>$row[dep_id]</option>";
+                 }
+                 ?>
+                 <p>
+                     <label for="sign-dep-id">Department code:</label>
+                     <select class="input" name="dep_id">
+                         <option value="M1">-- Select the Department Id</>
                              <?php echo $str ?>
                      </select>
                  </p>
