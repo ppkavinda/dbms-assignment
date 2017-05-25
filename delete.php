@@ -11,6 +11,9 @@ if(isset($_GET['s_id'])){
     $date = $_GET['date'];
     $mcode = $_GET['mcode'];
     $sql = "DELETE FROM exmas WHERE date='$date' AND mcode='$mcode';";
+}else if(isset($_GET['mcode'])){
+    $mcode = $_GET['mcode'];
+    $sql = "DELETE FROM module WHERE mcode='$mcode';";
 }
 
 $result = mysqli_query($con, $sql) or die(mysqli_error($con));

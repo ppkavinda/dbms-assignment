@@ -28,7 +28,7 @@ if(isset($_GET["s_id"])){
     $str2 = '';
     if(mysqli_num_rows($result2)>0){
         while($row=mysqli_fetch_assoc($result2)){
-            $str2 .="<li style='margin: 10px; '><a href='modules.php?mcode=$row[mcode]'>$row[title]</a></li>";
+            $str2 .="<li style='margin: 10px; '><a href='module.php?mcode=$row[mcode]'>$row[title]</a></li>";
         }
     }else{
         $str2 = "No data";

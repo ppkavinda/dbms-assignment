@@ -26,6 +26,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["level"])) {
      <h1>DBMS System</h1>
      <h1>Admin page</h1>
      <div class="container-main admin">
+         <a class="admin-link" href="insert_module.php">Registere Module</a>
          <a class="admin-link" href="register_student.php">Registere Students</a>
          <a class="admin-link" href="register_lecture.php">Registere Lecture</a>
          <a class="admin-link" href="while.php">Update module's lecturers</a>
@@ -34,6 +35,7 @@ if (!isset($_SESSION["id"]) || !isset($_SESSION["level"])) {
          <a class="admin-link" href="insert_results.php">Enter results</a>
          <a class="admin-link" href="insert_exams.php">Enter exam dates</a>
          <a class="admin-link" href="exams.php">Show exams</a>
+         <a class="admin-link" href="modules.php">Show modules</a>
      </div>
      <script src="js/navbar.js"></script>
      </body>
