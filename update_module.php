@@ -1,5 +1,14 @@
 <?php
 session_start();
+if (isset($_GET['mcode'])) {
+    include_once("config.php");
+    $mcode = $_GET['mcode'];
+    $sql = "SELECT * FROM module WHERE mcode='$mcode';";
+    $result = mysqli_query($con, $sql);
+    if($result){
+        $row1 = mysqli_fetch_assoc($result);
+    }
+}
 if(isset($_POST["submit"])){
     $mcode = $_POST["mcode"];
     $cr_level = $_POST["cr_level"];
@@ -55,15 +64,15 @@ if(isset($_POST["submit"])){
                  </p>
                  <p>
                      <label for="sign-mcode">Module Code:</label>
-                     <input type="text" name="mcode" id="sign-mcode" placeholder="Enter Module Code" required>
+                     <input type="text" name="mcode" id="sign-mcode" placeholder="Enter Module Code" value="<?php echo $row1['mcode'] ?>" required>
                  </p>
                  <p>
                      <label for="sign-title">Titlle:</label>
-                     <input type="text" name="title" id="sign-title" placeholder="Enter Module title" required>
+                     <input type="text" name="title" id="sign-title" placeholder="Enter Module title" value="<?php echo $row1['title'] ?>" required>
                  </p>
                  <p>
                      <label for="sign-cr-level">Credit level:</label>
-                     <input type="text" name="cr_level" id="sign-cr-level" placeholder="Enter Credit Level" required>
+                     <input type="text" name="cr_level" id="sign-cr-level" placeholder="Enter Credit Level" value="<?php echo $row1['cr_level'] ?>" required>
                  </p>
                  <?php
                  $sql = "SELECT l_id FROM staff;";
@@ -77,23 +86,23 @@ if(isset($_POST["submit"])){
                  <p>
                      <label for="sign-mcode">Module code:</label>
                      <select class="input" name="l_id">
-                         <option value="M1">-- Select the Coordinator Id</>
+                         <option value="M1">-- Select the Coordinator Id</option>
                              <?php echo $str ?>
                      </select>
                  </p>
                  <?php
                  $sql = "SELECT d_id FROM diploma;";
                  include_once("config.php");
-                 $result = mysqli_query($con, $sql) or die(mysqli_error());
+                 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
                  $str ='';
                  while($row=mysqli_fetch_array($result)){
-                     $str .="<option value='$row[d_id]'>$row[d_id]</option>";
+                     $str .= "<option value ='$row[d_id]'>$row[d_id]</option>";
                  }
                  ?>
                  <p>
                      <label for="sign-mcode">Module code:</label>
                      <select class="input" name="d_id">
-                         <option value="M1">-- Select the Diploma Id</>
+                         <option value="M1">-- Select the Diploma Id</option>
                              <?php echo $str ?>
                      </select>
                  </p>
@@ -109,15 +118,15 @@ if(isset($_POST["submit"])){
                  <p>
                      <label for="sign-dep-id">Department code:</label>
                      <select class="input" name="dep_id">
-                         <option value="M1">-- Select the Department Id</>
+                         <option value="M1">-- Select the Department Id</option>
                              <?php echo $str ?>
                      </select>
                  </p>
                  <p>
                      <label for="sign-sem">Semester:</label>
-                     <input type="text" name="sem" id="sign-sem" placeholder="Enter the Semester" required>
+                     <input type="text" name="sem" id="sign-sem" placeholder="Enter the Semester" value="<?php echo $row1['semester'] ?>" required>
                  </p>
-                 <input id="submit" type="submit" name="submit"value="Insert module" onclick="return validatePassword()">
+                 <input id="submit" type="submit" name="submit"value="Update module" onclick="return validatePassword()">
              </form>
          </div>
      </div>

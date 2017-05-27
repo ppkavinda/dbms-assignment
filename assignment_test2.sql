@@ -2,8 +2,8 @@
 -- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 21, 2017 at 09:13 AM
+-- Host: localhost
+-- Generation Time: May 27, 2017 at 11:50 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -107,10 +107,9 @@ CREATE TABLE `exmas` (
 --
 
 INSERT INTO `exmas` (`date`, `mcode`) VALUES
-('2017-05-09', 'M1'),
 ('2017-05-10', 'M1'),
-('2017-05-16', 'M1'),
 ('2017-05-17', 'M1'),
+('2017-05-25', 'M1'),
 ('2017-05-26', 'M1'),
 ('2017-05-01', 'M2'),
 ('2017-05-16', 'M2'),
@@ -138,6 +137,7 @@ CREATE TABLE `module` (
 
 INSERT INTO `module` (`mcode`, `title`, `cr_level`, `coordinator_id`, `d_id`, `dep_id`, `semester`) VALUES
 ('M1', 'dsa 1', 2, 'L1', 'D1', 'DEP1', 1),
+('M10', 'test', 3, 'L3', 'D5', 'DEP1', 2),
 ('M12', 'machine learn', 2, '', 'D7', 'DEP1', 2),
 ('M13', 'x-ray', 3, '', 'D8', 'DEP4', 1),
 ('M14', 'quontom mechenic', 3, '', 'D9', 'DEP2', 1),
@@ -170,8 +170,7 @@ CREATE TABLE `staff` (
 INSERT INTO `staff` (`l_id`, `fname`, `lname`, `dep_id`) VALUES
 ('L1', 'noel', 'pranando', 'DEP1'),
 ('L2', 'kasun', 'jayawardhana', 'DEP2'),
-('L3', 'ruwan', 'weerasinghe', 'DEP1'),
-('L4', 'amila', 'weerasinghe', 'DEP2');
+('L3', 'ruwan', 'weerasinghe', 'DEP1');
 
 -- --------------------------------------------------------
 
@@ -213,9 +212,11 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`s_id`, `fname`, `lname`, `address1`, `address2`, `d_id`) VALUES
-('S1', 'shehan', 'chamika', 'medawatta kerantholla', 'thelijjawila', 'D1'),
-('S2', 'thusitha', 'salinda', 'malimbada', 'matara', 'D2'),
-('S3', 'shehan', 'chamika', 'fort', 'colombo', 'D2');
+('S1', 'prasad', 'kavinda', 'medawatta kerantholla', 'thelijjawila', 'D1'),
+('S2', 'shehan', 'chamika', 'kaduwela road battaramulla', 'colombo', 'D2'),
+('S3', 'thusitha', 'salinda', 'rahula road', 'kandy', 'D3'),
+('S4', 'thusitha', 'salinda', 'rahula road', 'kandy', 'D3'),
+('S5', 'danushka', 'herath', 'alawwa', 'kurunagala', 'D4');
 
 -- --------------------------------------------------------
 
@@ -236,12 +237,6 @@ CREATE TABLE `student_exam` (
 
 INSERT INTO `student_exam` (`date`, `mcode`, `s_id`, `grade`) VALUES
 ('2017-05-01', 'M2', 'S1', 'B'),
-('2017-05-01', 'M2', 'S2', 'D-'),
-('2017-05-04', 'M3', 'S2', 'D+'),
-('2017-05-09', 'M1', 'S1', 'B-'),
-('2017-05-10', 'M1', 'S2', 'D-'),
-('2017-05-16', 'M1', 'S1', 'A+'),
-('2017-05-16', 'M1', 'S2', 'B-'),
 ('2017-05-17', 'M1', 'S1', 'C+'),
 ('2017-05-26', 'M1', 'S1', 'A+');
 
@@ -266,7 +261,9 @@ INSERT INTO `users` (`id`, `password`, `ulevel`) VALUES
 ('L3', '2eaac698ef09c12c7e37e8ede8776426', 1),
 ('L4', '93f56ccb72718b484ea3464e0c670327', 1),
 ('S2', '97833e1ab4a92ac4c39442488eadcd26', 2),
-('S3', '67d9b1a7d64d9a9961ca409ea16bffdd', 2);
+('S3', '67d9b1a7d64d9a9961ca409ea16bffdd', 2),
+('S4', '9174d41d27447d06999085b0f2a67619', 2),
+('S5', '466003902974669942f8e8127bd44c88', 2);
 
 --
 -- Indexes for dumped tables

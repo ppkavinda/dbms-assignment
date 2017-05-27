@@ -67,7 +67,7 @@ if(isset($_POST["submit"])){
                      <label for="sign-fname">Date:</label>
                      <input type="date" name="date" id="sign-date" placeholder="Enter the Date" value="<?php echo $row['date'] ?>" required>
                  </p>
-                 <input id="submit" type="submit" name="submit"value="Register">
+                 <input id="submit" type="submit" name="submit"value="Update">
              </form>
          </div>
      </div>
