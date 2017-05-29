@@ -20,12 +20,13 @@ if(isset($_POST["submit"])){
 
     include_once("config.php");
     // $sql1 = "INSERT INTO exmas(mcode, date) VALUES ('$mcode', '$date');";
-    $sql2 = "INSERT INTO module(mcode, cr_level, title, coordinator_id, d_id, dep_id, semester) VALUES ('$mcode', '$cr_level', '$title', '$l_id', '$d_id', '$dep_id', '$sem');";
+    $sql2 = "UPDATE module SET mcode='$mcode', cr_level='$cr_level', coordinator_id='$l_id', d_id='$d_id', dep_id='$dep_id', semester='$sem' WHERE mcode='$mcode';";
     // $result1 = mysqli_query($con, $sql1) or die(mysqli_error($con));
     $result2 = mysqli_query($con, $sql2) or die(mysqli_error($con));
 
     if(/* $result1 && */ $result2){
-        $msg = "* registration successed !";
+        // echo '<script>alert("UPDATE module SET mcode=' . $mcode . ', cr_level=' . $cr_level. ', coordinator_id='.$l_id.', d_id='.$d_id.', dep_id='.$dep_id.', semester='.$sem.' WHERE mcode='.$mcode.'");</script>';
+        echo '<script>alert("'.$sql2.'")</script>';
     }else{
         $msg = "* insertion failed !";
         // echo mysqli_error($con);
